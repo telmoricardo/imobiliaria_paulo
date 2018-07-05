@@ -4,8 +4,8 @@
     <li>
         <a href="#"><i class="shoticon shoticon-post"></i> Posts</a>
         <ul class="submenu">
-            <li><a href="?pagina=post"><i class="shoticon shoticon-add"></i> Novo Post</a></li>
-            <li><a href="?pagina=listar-post"><i class="shoticon shoticon-list"></i> Lista Posts</a></li>
+            <li><a href="<?= HOME;?>/post/Post"><i class="shoticon shoticon-add"></i> Novo Post</a></li>
+            <li><a href="<?= HOME;?>/post/Listar"><i class="shoticon shoticon-list"></i> Lista Posts</a></li>
         </ul>
     </li>
 

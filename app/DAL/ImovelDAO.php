@@ -195,7 +195,9 @@ class ImovelDAO {
     public function retornaImovelCod($cod) {
         try {
             /* SELECT a.codAgente, a.nome, i.cod, i.titulo, i.url, i.valor, i.condominio, i.descricao, i.endereco, i.cidade, i.estado, i.tipo, i.quartos, i.suite, i.banheiro, i.garagem, i.andar, i.cep, i.thumb, i.destaque, i.area, i.agente FROM agente a INNER JOIN imovel i ON a.codAgente = i.agente WHERE i.cod = 26 */
-            $sql = "SELECT a.codAgente, a.nome, a.telefone, a.email, a.regiao, i.cod, i.titulo, i.url, i.valor, i.condominio, i.descricao, i.endereco, i.cidade, i.estado, i.tipo, i.quartos, i.suite, i.banheiro, i.garagem, i.andar, i.cep, i.thumb, i.destaque, i.area, i.agente FROM agente a INNER JOIN imovel i ON a.codAgente = i.agente WHERE i.cod = :cod";
+            $sql = "SELECT a.codAgente, a.nome, a.telefone, a.email, a.regiao, i.cod, i.titulo, i.url, i.valor, i.condominio, i.descricao, "
+                    . "i.endereco, i.cidade, i.estado, i.categoria, i.quartos, i.suite, i.banheiro, i.garagem, i.andar, i.cep, i.thumb, i.area, "
+                    . "i.agente FROM agente a INNER JOIN imovel i ON a.codAgente = i.agente WHERE i.cod = :cod";
             $param = array(":cod" => $cod);
             //Data Table
             $dt = $this->pdo->ExecuteQueryOneRow($sql, $param);
@@ -210,7 +212,7 @@ class ImovelDAO {
             $imovel->setEndereco($dt['endereco']);
             $imovel->setCidade($dt['cidade']);
             $imovel->setEstado($dt['estado']);
-            $imovel->setTipo($dt['tipo']);
+            $imovel->setCategoria($dt['categoria']);
             $imovel->setQuartos($dt['quartos']);
             $imovel->setSuite($dt['suite']);
             $imovel->setBanheiro($dt['banheiro']);
@@ -218,7 +220,6 @@ class ImovelDAO {
             $imovel->setAndar($dt['andar']);
             $imovel->setCep($dt['cep']);
             $imovel->setThumb($dt['thumb']);
-            $imovel->setDestaque($dt['destaque']);
             $imovel->setArea($dt['area']);
             $imovel->getAgente()->setCod($dt['codAgente']);
             $imovel->getAgente()->setNome($dt['nome']);
@@ -693,7 +694,7 @@ class ImovelDAO {
     /*pagina single*/
     public function retornaImovelUrl($url) {
         try {
-            $sql = "SELECT a.codAgente, a.nome, a.telefone, a.email, a.regiao, i.cod, i.titulo, i.url, i.valor, i.condominio, i.descricao, i.endereco, i.cidade, i.estado, i.categoria, i.quartos, i.suite, i.banheiro, i.garagem, i.andar, i.cep, i.thumb, i.destaque, i.area, i.agente, i.mapa FROM agente a INNER JOIN imovel i ON a.codAgente = i.agente WHERE i.url = :url AND i.status = 1";
+            $sql = "SELECT a.codAgente, a.nome, a.telefone, a.email, a.regiao, i.cod, i.titulo, i.url, i.valor, i.condominio, i.descricao, i.endereco, i.cidade, i.estado, i.categoria, i.quartos, i.suite, i.banheiro, i.garagem, i.andar, i.cep, i.thumb, i.destaque, i.area, i.agente, i.mapa, i.street FROM agente a INNER JOIN imovel i ON a.codAgente = i.agente WHERE i.url = :url AND i.status = 1";
             $param = array(":url" => $url);
             //Data Table
             $dt = $this->pdo->ExecuteQueryOneRow($sql, $param);
@@ -719,6 +720,7 @@ class ImovelDAO {
             $imovel->setDestaque($dt['destaque']);
             $imovel->setArea($dt['area']);
             $imovel->setMapa($dt['mapa']);
+            $imovel->setStreet($dt['street']);
             $imovel->getAgente()->setCod($dt['codAgente']);
             $imovel->getAgente()->setNome($dt['nome']);
             $imovel->getAgente()->setEmail($dt['email']);
@@ -770,5 +772,58 @@ class ImovelDAO {
             endif;
         }
     }
+    /*Altera quantidades de Views*/
+    public function AlterarViews($url) {
+        try {
+            $sql = "UPDATE imovel SET view = view + 1 WHERE url = :url";
+            $param = array(
+                ":url" => $url
+            );
+            return $this->pdo->ExecuteNonQuery($sql, $param);
+        } catch (PDOException $e) {
+            if ($this->debug):
+                echo "Erro {$e->getMessage()}, LINE {$e->getLine()}";
+            else:
+                return null;
+            endif;
+        }
+    }    
+    
+    public function listarViews($inicio = null, $quantidade = null) {
+        try {
+            $sql = "SELECT * FROM imovel WHERE view > 2 LIMIT :inicio, :quantidade";
+            $param = array(
+                ":inicio" => $inicio,
+                ":quantidade" => $quantidade
+            );
+            $dt = $this->pdo->ExecuteQuery($sql, $param);
+
+
+            $listaImovel = [];
+            foreach ($dt as $pts) {
+                $imovel = new Imovel();
+                $imovel->setCod($pts['cod']);
+                $imovel->setTitulo($pts['titulo']);
+                $imovel->setUrl($pts['url']);
+                $imovel->setValor($pts['valor']);
+                $imovel->setEndereco($pts['endereco']);
+                $imovel->setCidade($pts['cidade']);
+                $imovel->setCategoria($pts['categoria']);
+                $imovel->setCep($pts['cep']);
+                $imovel->setThumb($pts['thumb']);
+                $imovel->setStatus($pts['status']);
+                $listaImovel[] = $imovel;
+            }
+            return $listaImovel;
+        } catch (PDOException $e) {
+            if ($this->debug):
+                echo "Erro {$e->getMessage()}, LINE {$e->getLine()}";
+            else:
+                return null;
+            endif;
+        }
+    }
+    
+    
 
 }

@@ -14,6 +14,9 @@ $imovelController = new ImovelController();
 $imagemController = new ImagemController();
 $helper = new Helper();
 
+//alteração views
+$viewAlterar = $imovelController->AlterarViews($url);
+
 $retornaImovel = $imovelController->retornaImovelUrl($url);
 
 if($retornaImovel == null):
@@ -30,10 +33,13 @@ else:
     $descricao = $retornaImovel->getDescricao();
     $aluguel = $retornaImovel->getValor();
     $condominio = $retornaImovel->getCondominio();
+    $mapa = $retornaImovel->getMapa();
+    $street = $retornaImovel->getStreet();
+    $trecentosSessenta = "";
 
 ?>
 <!----------------------------------SLIDE HOME ----------------------------------->
-<header class="slide container" id="gallery">
+<header class="slide container bg-body" id="gallery">
     <div class="wrapper">               
         <div class="jcarousel-wrapper">
             <div class="jcarousel">
@@ -52,18 +58,19 @@ else:
             <a href="#" class="jcarousel-control-next">&rsaquo;</a>            
         </div>
     </div>
+    <div class="clear"></div>
 </header>
 
 <header id="mapa" class="container mapa">
-    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7678.5634954967245!2d-47.883604!3d-15.789091!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xa4c7c50f0a1708f1!2sPaulOOctavio+Aluguel!5e0!3m2!1spt-BR!2sbr!4v1528296819627" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+    <?= $mapa;?>
 </header>
 
 <header id="streetview" class="container streetview">
-    <iframe src="https://www.google.com/maps/embed?pb=!4v1528296857853!6m8!1m7!1s48BRbLgcYI8pkmHKQNAs6Q!2m2!1d-15.78904045938639!2d-47.88370097356238!3f101.06256!4f0!5f0.7820865974627469" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+    <?= $street;?>
 </header>
 
 <!------------------------------- CONTENT SITE -------------------------------->
-<main class="main container">
+<main class="main container bg-body">
     <div class="content">
         <section class="secao_desc">
             <h1 class="font-zero">Descrição do Imóvel</h1>
@@ -77,9 +84,34 @@ else:
                 <!---------------------------------MENU IMOVEL----------------------------------------->
                 <div class="btn_nav">
                     <a href="#" id="btn_gallery" class="active btn btn_menu"> <span class="file fa fa-file-image"></span> FOTOS</a>
+                    <?php
+                    if($mapa==""):
+                    else:
+                    ?>
                     <a href="#" id="btn_mapa" class="btn btn_menu"> <span class="map fa fa-map-signs"></span> MAPA</a>
+                    <?php
+                    endif;
+                    ?>
+                    
+                    <?php
+                    if($trecentosSessenta == ""):
+                    else:
+                    ?>
                     <a href="#" id="btn_360" class="btn btn_menu"> <span class="street fa fa-street-view"></span> 360</a>
+                    <?php
+                    endif;
+                    ?>
+                    
+                    <?php
+                    if($street == ""):
+                    else:
+                    ?>
                     <a href="#" id="btn_street" class="btn btn_menu"> <span class="view fa fa-share-square"></span> RUA</a>
+                    <?php
+                    endif;
+                    ?>
+                    
+                    
                 </div>
 
                 <!---------------------------------ICONES IMOVEL----------------------------------------->
@@ -192,12 +224,11 @@ else:
 
                 <div class="box_speack_user">
                     <h1 class="font-zero">Horario disponivel e enviar documentos</h1>
-                    <a href="#" class="btn btn-clock">
-                        <span class="fa fa-clock"></span>
-                        Horários Disponiveis para visita
-                    </a>
-
-                    <a href="#" class="btn btn-send">
+                    <a href="<?= HOME;?>/agendar" class="btn btn-clock">
+                        <span class="fa fa-clock"></span>  Horário Disponível para Visita
+                    </a>                  
+                    
+                    <a href="<?= HOME;?>/como-alugar" class="btn btn-send">
                         <span class="fa fa-upload"></span>
                         Enviar Documentos
                     </a>

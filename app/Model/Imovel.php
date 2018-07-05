@@ -30,14 +30,16 @@ class Imovel {
     private $destaque;
     private $area;
     private $mapa;
+    private $street;
     private $agente;
     private $status;
+    private $view;
     
     public function __construct() {
         $this->agente = new Agente();
         $this->categoria = new Categoria();
     }
-    
+   
     function getCod() {
         return $this->cod;
     }
@@ -118,12 +120,20 @@ class Imovel {
         return $this->mapa;
     }
 
+    function getStreet() {
+        return $this->street;
+    }
+
     function getAgente() {
         return $this->agente;
     }
 
     function getStatus() {
         return $this->status;
+    }
+
+    function getView() {
+        return $this->view;
     }
 
     function setCod($cod) {
@@ -206,6 +216,10 @@ class Imovel {
         $this->mapa = $mapa;
     }
 
+    function setStreet($street) {
+        $this->street = $street;
+    }
+
     function setAgente($agente) {
         $this->agente = $agente;
     }
@@ -214,7 +228,9 @@ class Imovel {
         $this->status = $status;
     }
 
+    function setView($view) {
+        $this->view = $view;
+    }
 
-    
-    
+
 }

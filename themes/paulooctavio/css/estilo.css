@@ -47,7 +47,7 @@
 .tagline_dois .titulo_slide{font-size: 5.5em;}
 .tagline_dois .titulo_slide_b{font-size: 1.4em; letter-spacing: 3px; margin-top: 15px;}
 
-.btn_slider{position: absolute; z-index: 9999; bottom: 20px; left: 50%;}
+.btn_slider{position: absolute; z-index: 9999; bottom: 100px; left: 50%;}
 .btn_slider a{font-size: 4em; color: white;}
 .btn_slider a:hover{color: #f03e3e;}
 
@@ -55,9 +55,14 @@
 .main_home{float: left;background: #dedede;}
 .section_recentes{background: #090809;}
 .section_recentes h1{float: left; width: 100%; color: #fff; color: #fff; font-weight: bold;margin: 35px 0 40px 0;}
-.fig_recentes{float: left; width: calc(33.33333333333333% - 20px); margin: 0 10px;}
+.fig_recentes{float: left; width: calc(33.33333333333333% - 20px); margin: 0 10px; position: relative;}
 .fig_recentes h2{float: left; margin: 25px 0 15px 0; width: 100%; color: #fff;}
 .fig_recentes p{color: #fff;float: left;margin-right: 17px; margin-bottom: 15px; }
+
+/*favoritos*/
+.favorites{position: absolute; float: left; top: 10px; right: 10px; z-index: 99999;}
+.favorites a{font-size: 2em; color: rgba(232,18,18,0.67); transition: 0.5s all;}
+.favorites a:hover{color:#f00; font-size: 2.4em;}
 
 .diferenciais{background: linear-gradient(#ffffff, #e5e5e5); float: left; width: 100%;}
 .diferenciais .titulo_dif{font-size: 0;}
@@ -101,7 +106,10 @@
 
 /*---------------------- SINGLE ----------------------*/
 .main{float: left;margin: 30px 0; }
-
+.mapa{width: 100%; float: left; }
+.mapa iframe{width: 100%;}
+.streetview{width: 100%; float: left; }
+.streetview iframe{width: 100%;}
 /*----------------- SECAO DESCRICAO ----------------*/
 .main .secao_desc{width: 67%;float: left;}
 .main .secao_desc  .art_desc{width: 100%;float: left;margin: 30px 0; }
@@ -118,6 +126,20 @@
 .btn_nav .btn_menu .fa{margin-right: 10px; color: #dedede;}
 .btn_nav .active{background: #ff0000;border: 1px solid #ff0000;}
 .btn_nav .active:hover{background: #ec6464;border: 1px solid #ec6464; }
+
+/*----------------- MEUS FAVORITOS ----------------*/
+.meus_favoritos{float: left;}
+.meus_favoritos h1{margin-top: 2rem; margin-bottom: 0.8rem; margin-left: 10px;}
+.imoveis_favoritos{width: calc(25% - 20px); margin: 0 10px; float: left; background-color: white; margin-bottom: 5rem; transition: .3s all; position: relative;}
+.imoveis_favorites{width: 100%; float: left;}
+.thumb_favoritos{width: 100%; float: left; height: 248px; position: relative; overflow: hidden; transform: scale(1); transition: .3s all;}
+.imoveis_favoritos img{max-width: 100%; position: absolute;}
+.imoveis_favoritos .txt_imoveis_favoritos{margin-top: 1.5rem; float: left;}
+.imoveis_favoritos:hover{box-shadow: 1px 2px 3px #463e3e;}
+.imoveis_favoritos:hover .thumb_favoritos img{width: 350px; transform: scale(1.2);}
+
+.icon_favorites{position: absolute; float: left; top: 15px; right: 15px;}
+.icon_favorites a{font-size: 2em; color: red;}
 
 /*-------------------------------------- BOX ICONES DESCRICAO ----------------*/
 .main_icon{width: 100%;float: left;padding: 35px 70px 0 0;}
@@ -186,6 +208,71 @@
 .lendoImoveis .load{width: 70px;}
 .lendoImoveis p{font-size: 1.4em; margin-bottom: 1.5rem;}
 
+/*404*/
+.related_item{width: calc(33.33% - 20px); margin: 0 10px; float: left;}
+.related_item h1{margin: 10px 0;}
+.related_item a{color: #CF4823;}
+.related_item a:hover{text-decoration: underline;}
+.related_item .tagline{font-size: 0.85em; color: #555;}
+
+/*-------------------------------FOOTER ----------------------------------*/
+/*.main_footer{}*/
+.main_footer{}
+.box_newletter{margin-top: 2rem; margin-bottom: 2rem; float: left; width: 100%;}
+.box_newletter h1{width: 100%; color: #fff; margin: 15px 0 15px 0;}
+.box_newletter h2{width: 100%; color: #fff;margin: 0 0 15px 0;}
+
+.copy .box_menu{float: left;padding-top: 25px;font-family: 'Roboto', sans-serif;}
+.copy .box_menu h1{width: 100%;float: left;color: #fff;}
+.copy .box_menu .menu_footer{width: 100%;float: left;}
+.copy .box_menu .menu_footer li{float: left;padding: 10px 5px 10px 0;}
+.copy .box_menu .menu_footer li span{color: #fff;}
+.copy .box_menu .menu_footer li a{color: #fff;font-size: 1em;}
+.copy .box_menu .menu_footer li a:hover{color: #ff0000;}
+.copy .text_copy {float: left; color: #fff;font-size: 1em;margin-top: 50px;font-family: 'Roboto', sans-serif;}
+.copy .logo_footer {    position: relative;   right: -53px;float: left;background: #fff;}
+.copy .logo_footer a {width: 195px; height: 60px;float: left;}
+.copy .logo_footer a img{width:100%;}
+
+/*-----------------BLOG--------------------------*/
+.blog h1{margin-top: 2rem; margin-bottom: 1.5rem; font-size: 2em; text-transform: uppercase; width: 100%; float: left;}
+.blog_article{width: 100%; float: left; margin-bottom: 25px;}
+.blog_article .blog_thumb{float: left; width: 38%; margin-right: 2%;}
+.blog_article .blog_text{float: left; width: 59%;}
+.blog_text h1{font-size: 2em; margin: 0; padding: 0; margin-bottom: 8px;}
+.blog_text p{font-size: 1.2em; margin-bottom: 8px; text-align: justify; line-height: 25px; }
+.blog_text a{margin-top: 8px;}
+
+/*agendar*/
+.btn-agendar{
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 1em;
+    font-weight: 400;
+    color: #fff;
+    background: #333;
+    border: 1px solid #222;
+    cursor: pointer;
+    margin-bottom: 8px;
+    -webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,0.2), 0 1px 2px rgba(0,0,0,0.05);
+    -moz-box-shadow: inset 0 1px 0 rgba(255,255,255,0.2), 0 1px 2px rgba(0,0,0,0.05);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.2), 0 1px 2px rgba(0,0,0,0.05);
+}
+.btn:hover{text-decoration: none !important;}
+
+/*COMO-ALUGAR*/
+.como-alugar .form label{margin-top: 1.5rem !important; float: left;}
+
+/*CONTATO*/
+.contato .contato_titulo{margin-top: 1.5rem; float: left; margin-bottom: 1rem;}
+.contato_titulo h1{font-size: 2.5em; margin-bottom: 1.5rem;}
+.contato_titulo p{font-size: 1.3em; margin-bottom: 1.5rem;}
+.contato .contato_txt{float: left; margin-bottom: 1rem; width: 100%;}
+.contato_txt h1{margin-bottom: 8px; }
+.contato_txt p{margin-bottom: 8px;}
+
+
+/*---------------------------------------------MEDIA PAGES-----------------------------------------*/
 @media(max-width: 390px){
     .main_quero_alugar .destaque .artigo_destaque .box_aluguel .box_btn_aluguel {  width: 100%; margin-left: 0;}
   .main_quero_alugar .destaque .artigo_destaque .box_aluguel .box_btn_aluguel .btn_aluguel {padding: 10px 15px;}
@@ -208,53 +295,6 @@
 @media(max-width: 1298px){
    /*.main_quero_alugar  .destaque .artigo_destaque .nav_aluguel .menu_aluguel li{padding: 2% 1%;}*/ 
 }
-
-
-/*-------------------------------FOOTER ----------------------------------*/
-/*.main_footer{}*/
-.main_footer{float: left;background: rgb(17, 17, 17);}
-.newletter{float: left;margin-bottom: 30px;font-family: 'Roboto', sans-serif;}
-.newletter .box_newletter h1{width: 100%; color: #fff;margin: 25px 0 10px 0;}
-.newletter .box_newletter h2{width: 100%; color: #fff;margin: 0 0 15px 0;}
-.main_footer .form_newletter{position: relative;}
-.main_footer .form_newletter .btn_newletter{
-    width: 30%;
-    height: 40px;
-    position: absolute;
-    right: 5px;
-    border-radius: 0;
-    margin-top: 4px;
-    background: #ff0000;
-    border: 1px solid #ff0000;
-}
-
-.main_footer .form_newletter .btn_newletter:hover{ background: #ec6464; border: 1px solid #ec6464;}    
-.main_footer .copy{background: #000000;float: left;position: relative;}
-.main_footer .helper{float: left;}
-.main_footer .helper div .thumb-img{
-    background: url(../img/sandra.png) center center no-repeat;
-    width: 163px;
-    height: 293px;
-    position: absolute;
-    top: -133px;
-    z-index: 2;
-    float: left;
-    right: 60px;
-}
-.copy .box_menu{float: left;padding-top: 25px;font-family: 'Roboto', sans-serif;}
-.copy .box_menu h1{width: 100%;float: left;color: #fff;}
-.copy .box_menu .menu_footer{width: 100%;float: left;}
-.copy .box_menu .menu_footer li{float: left;padding: 10px 5px 10px 0;}
-.copy .box_menu .menu_footer li span{color: #fff;}
-.copy .box_menu .menu_footer li a{color: #fff;font-size: 1em;}
-.copy .box_menu .menu_footer li a:hover{color: #ff0000;}
-.copy .text_copy {float: left; color: #fff;font-size: 1em;margin-top: 50px;font-family: 'Roboto', sans-serif;}
-.copy .logo_footer {    position: relative;   right: -53px;float: left;background: #fff;}
-.copy .logo_footer a {width: 195px; height: 60px;float: left;}
-.copy .logo_footer a img{width:100%;}
-
-
-/*---------------------------------------------MEDIA PAGES-----------------------------------------*/
 @media(max-width: 1200px){
     .diferenciais .box_diferenciais .info_diferenciais .txt_diferencial{position: relative;left: 30px;}
 }

@@ -1,3 +1,7 @@
+<?php
+$imovelController = new ImovelController();
+$helper = new Helper();
+?>
 <div class="container">
     <div class="content">
         <h1 class="font-zero">Conheça o nosso imóvel.</h1>
@@ -44,14 +48,19 @@
     <div class="content">
         <h1>MAIS ACESSADOS</h1>
 
-        <?php for ($i = 0; $i < 3; $i++): ?>
+        <?php
+            $listaViews = $imovelController->listarViews(0, 3);
+            foreach ($listaViews as $views): 
+        ?>
             <article class="artigos_acessados">
-                <a href="#">
-                    <img src="<?= REQUIRE_PATH ?>/img/thumb01.jpg">
-                    <h2>RESIDENCIA CARLOS CHAGAS</h2>
+                <a href="single/<?= $views->getUrl(); ?>">
+                    <img src="tim.php?src=upload/<?= $views->getThumb(); ?>&w=300&h=250">
+                    <h2><?= $helper->limitarTexto($views->getTitulo(), 50)?></h2>
                 </a>
             </article>
-        <?php endfor; ?>
+        <?php 
+            endforeach; 
+        ?>
     </div>
     <div class="clear"></div>
 </section>

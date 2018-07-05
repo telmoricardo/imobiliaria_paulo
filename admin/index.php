@@ -1,19 +1,23 @@
+<?php
+require_once '../app/configAdmin.php';
+?>
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width,initial-scale=1">
         <title>Painel Administrativo</title>
-        <link href="css/boot.css" rel="stylesheet" type="text/css"/>
-        <link href="css/painel.css" rel="stylesheet" type="text/css"/>
-
+        <link href="<?= INCLUDE_PATH;?>/css/boot.css" rel="stylesheet" type="text/css"/>
+        <link href="<?= INCLUDE_PATH;?>/css/painel.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+        
     </head>
     <body>
         <div class="container">
             <div class="admin-left">                
                 <div class="admin-left-thumb">
                     <div class="admin-thumb">
-                        <img src="images/man.png" alt=""/>
+                        <img src="<?= INCLUDE_PATH;?>/images/man.png" alt=""/>
                     </div>
                     <h1>Telmo Ricardo</h1>
                 </div>
@@ -33,7 +37,7 @@
                         </div>                        
                         <div class="admin-header-right">
                             <a href="#">
-                                <img class="exit" src="images/exit.png"> Sair
+                                <img class="exit" src="<?= INCLUDE_PATH;?>/images/exit.png"> Sair
                             </a>
                         </div>
                     </div>
@@ -43,7 +47,7 @@
 
                 <footer class="admin-header-footer">                    
                     <div class="painel">
-                        <img src="images/house-outline.png"><h1>Painel Administrativo</h1>
+                        <img src="<?= INCLUDE_PATH;?>/images/house-outline.png"><h1>Painel Administrativo</h1>
                         <p>Work Controller / <a href="#">Painel</a></p>
                     </div>                    
                 </footer>  
@@ -55,31 +59,16 @@
                 <!--CONTEUDO DO SITE-->
                 <div class="conteudo-row">
                 <?php
-                    $pagina = filter_input(INPUT_GET, "pagina", FILTER_SANITIZE_STRING);
-
-                    $arrayPaginas = array(
-                        "dashboard" => "View/painel.php",
-                        "post" => "View/Post/post.php",
-                        "listar-post" => "View/Post/listarpost.php",
-                    );
-                    
-                    if($pagina):
-                        $encontrou = FALSE;
-                    
-                        foreach ($arrayPaginas as $page => $key) :
-                            if ($pagina == $page):
-                                $encontrou = true;
-                                require_once($key);
-                            endif;
-                        endforeach;
-                        
-                        if (!$encontrou):
-                            require_once("View/painel.php");
-                        endif;
-                    else:
-                        require_once("View/painel.php");
-                    endif;
+            
+                $Url[1] = (empty($Url[1]) ? null : $Url[1]);
                 
+                if (file_exists(REQUIRE_PATH . '/' . $Url[0] . '.php')):
+                    require REQUIRE_PATH . '/' . $Url[0] . '.php';
+                elseif (file_exists(REQUIRE_PATH . '/' . $Url[0] . '/' . $Url[1] . '.php')):
+                    require REQUIRE_PATH . '/' . $Url[0] . '/' . $Url[1] . '.php';
+                else:
+                    require REQUIRE_PATH . '/404.php';
+                endif;           
                     
                 ?>
                     </div>
@@ -97,6 +86,8 @@
 
         </div>
     </body>
-    <script src="js/jquery-2.2.4.js" type="text/javascript"></script>
-    <script src="js/fontawesome.js" type="text/javascript"></script>
+    <script src="<?= INCLUDE_PATH;?>/js/jquery-2.2.4.js" type="text/javascript"></script>
+    <script src="<?= INCLUDE_PATH;?>/js/fontawesome.js" type="text/javascript"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js" integrity="sha384-3LK/3kTpDE/Pkp8gTNp2gR/2gOiwQ6QaO7Td0zV76UFJVhqLl4Vl3KL1We6q6wR9" crossorigin="anonymous"></script>
+    <script src="<?= INCLUDE_PATH;?>/js/ajax.js" type="text/javascript"></script>
 </html>

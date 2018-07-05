@@ -3,10 +3,8 @@
 session_start();
 ob_start();
 
-define('HOME', 'https://localhost/works/paulo');
-define('BASE', 'https://localhost/works/paulo/admin/');
-//define('HOME', 'http://paulooctavioaluguel.com.br/novo');
-define('THEME', 'paulooctavio');
+define('HOME', 'https://localhost/works/paulo/admin');
+define('THEME', 'admin');
 
 define('INCLUDE_PATH', HOME . '/themes/' . THEME);
 define('REQUIRE_PATH', 'themes/' . THEME);

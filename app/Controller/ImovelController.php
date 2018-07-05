@@ -127,6 +127,14 @@ class ImovelController {
     /*pagina single*/
     public function retornaImovelUrl($url) {
        return $this->imovelDAO->retornaImovelUrl($url);
-       
+    }
+    //*QUANTIDADES DE VISUALIZAÇÃO*/
+    public function AlterarViews($url) {
+        return $this->imovelDAO->AlterarViews($url);
+    }
+    
+    /*Listando os imoveis mais vistos*/
+    public function listarViews($inicio = null, $quantidade = null) {
+        return $this->imovelDAO->listarViews($inicio, $quantidade);
     }
 }

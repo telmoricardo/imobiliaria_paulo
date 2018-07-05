@@ -1,7 +1,7 @@
 <div class="post-conteudo container">                   
     <div class="cad-form">
         <h1>Novo Post</h1>
-        <form action="form/form-atendimento" method="post" class="fl-left box-full">
+        <form method="post" class="fl-left box-full" id="ajax/post">
             <div class="row">
                 <div class="column column-12">
                     <label>
@@ -66,10 +66,10 @@
                 </div>
 
             </div>
-
             <div class="row">
                 <div class="column column-2">
-                    <input type="submit" class="btn_roxo btn btn-roxo" value="Enviar"/>                       
+                    <!--<input type="submit" class="btn_roxo btn btn-roxo" value="Enviar"/>-->  
+                    <button type="submit" class="btn btn-success"><i class="icone "></i> Enviar</button>                     
                 </div>
             </div>
         </form>           

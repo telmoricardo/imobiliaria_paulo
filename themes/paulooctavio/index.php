@@ -2,6 +2,7 @@
 $imovelController = new ImovelController();
 $categoriaController = new CategoriaController();
 $helper = new Helper();
+$carrinho = new Carrinho();
 ?>
 <!-- -------------------------SLIDER DO SITE---------------------------- -->
 <section class="slider">
@@ -55,14 +56,19 @@ $helper = new Helper();
             <h1>IMÓVEIS EM DESTAQUE</h1>
             <?php
             $imovelDestaque = $imovelController->ListarImovelDestaque(0, 3);
+            
             if ($imovelDestaque == null):
                 echo 'No momento não existe imovel em destaque, volte mais tarde';
             else:
-                foreach ($imovelDestaque as $imovel):
+                foreach ($imovelDestaque as $imovel):  
+                    $product = $imovel->getCod();
                     ?>
                     <article class="fig_recentes">
                         <a href="single/<?= $imovel->getUrl(); ?>"> 
                             <img src="tim.php?src=upload/<?= $imovel->getThumb(); ?>&w=720&h=500&zc=1" title="<?= $imovel->getTitulo(); ?>" alt="<?= $imovel->getTitulo(); ?>"/>
+                            <div class="favorites">
+                               <a href="<?= HOME; ?>/favoritos/add/<?= $imovel->getCod(); ?>" title="Meu Favorito"><i class="fas fa-heart icone"></i></a>
+                            </div>
                             <figcaption>
                                 <h2><?= $helper->limitarTexto($imovel->getTitulo(), 40); ?></h2>
                                 <?php
@@ -82,7 +88,8 @@ $helper = new Helper();
                                 ?>                          
                             </figcaption>
                         </a>
-                    </article>              
+                    </article>
+                    
                     <?php
                 endforeach;
             endif;
@@ -129,7 +136,7 @@ $helper = new Helper();
 
     <!--------------------------------------- PRODUTOS RETORNADO POR CATEGORIAS --------------------------->   
 </main>
-<div class="container">
+<div class="container bg-body">
     <div class="content">
         <?php
             $listarCategorias = $categoriaController->ListarCategoria();
@@ -160,9 +167,14 @@ $helper = new Helper();
                                         <img src="tim.php?src=upload/<?= $imoveisCategory->getThumb();?>&w=720&h=500&zc=1" alt="Image 1">
                                         <h2><?= $imoveisCategory->getTitulo();?></h2>
                                     </a>
+                                <div class="">
+                                    <a href="<?= HOME; ?>/favoritos/add/<?= $imoveisCategory->getCod(); ?>" title="Meu Favorito"><i class="fas fa-heart icone"></i></a>
+                                </div>                                    
                                 </li>
+                                
                                 <?php endforeach; ?>
                             </ul>
+                            
                         </div>
                         <a href="#" class="jcarousel-control-prev">&lsaquo;</a>
                         <a href="#" class="jcarousel-control-next">&rsaquo;</a>
@@ -170,10 +182,12 @@ $helper = new Helper();
                             <a href="./category/<?= $category->getUrl_categoria();?>" class="btn btn-gray"><i class="fas fa-plus"></i> Veja Mais</a>
                         </p>
                     </div>
+                    
                     <?php                         
                         endif;
                     ?>
                 </div>
+                
             </article>
                        
         </section>
@@ -182,7 +196,7 @@ $helper = new Helper();
             endforeach;
            endif;
         ?><!--listando as categorias-->
-    
+    <div class="clear"></div>
     </div>
 </div>
 
