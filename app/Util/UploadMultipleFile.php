@@ -1,6 +1,6 @@
 <?php
 
-class Upload {
+class UploadMultipleFile {
 
     private $arrFormatImages;
     private $arrFormatFiles;

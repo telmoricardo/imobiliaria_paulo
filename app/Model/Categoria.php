@@ -1,16 +1,14 @@
 <?php
 /**
  * Classe agente possui os atributos cod, nome, celular, telefone, email, região.
- * @author Telmo Ricardo
+ *
  */
-
-
-class Categoria {
-   
+class Categoria {   
     private $cod_categoria;
     private $nome_categoria;
     private $url_categoria;
-    
+    private $status_categoria;
+   
     function getCod_categoria() {
         return $this->cod_categoria;
     }
@@ -21,6 +19,10 @@ class Categoria {
 
     function getUrl_categoria() {
         return $this->url_categoria;
+    }
+
+    function getStatus_categoria() {
+        return $this->status_categoria;
     }
 
     function setCod_categoria($cod_categoria) {
@@ -35,7 +37,8 @@ class Categoria {
         $this->url_categoria = $url_categoria;
     }
 
-
-    
+    function setStatus_categoria($status_categoria) {
+        $this->status_categoria = $status_categoria;
+    }
     
 }

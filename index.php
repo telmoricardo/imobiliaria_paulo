@@ -12,7 +12,7 @@
         <link href="<?= INCLUDE_PATH; ?>/css/estilo.css" rel="stylesheet" type="text/css"/>
         <link href="<?= INCLUDE_PATH; ?>/css/jcarousel.responsive.css" rel="stylesheet" type="text/css"/>
         <script src="<?= INCLUDE_PATH; ?>/js/bioep.js"></script>
-        <script type="text/javascript">
+<!--        <script type="text/javascript">
             bioEp.init({
                 html: '<div id="bio_ep_content">' +
                         '<img style="width:50%; margin: 0 25%; float: left;"  id="bio_img" src="<?= INCLUDE_PATH;?>/img/popup.jpg" alt="Paulo Octavio Aluguel"' +
@@ -26,7 +26,7 @@
                 fonts: ['//fonts.googleapis.com/css?family=Titillium+Web:300,400,600'],
                 cookieExp: 0
             });
-        </script>
+        </script>-->
     </head>
     <body>
         <!------------------------------- CABECALHO ---------------------------->
@@ -69,7 +69,7 @@
 
                         <?php
                         $categoriaController = new CategoriaController();
-                        $listarTipos = $categoriaController->ListarCategoria();
+                        $listarTipos = $categoriaController->ListarCategoria();                       
 
                         if (isset($_POST['slTipo'])):
                             $_SESSION['tipo'] = filter_input(INPUT_POST, 'slTipo', FILTER_SANITIZE_NUMBER_INT);
@@ -94,12 +94,10 @@
                         <label>LOCAL ?</label>
                         <?php
                         $cidadeController = new CidadeController();
-                        $listarCidades = $cidadeController->ListarCidade();
-
+                        $listarCidades = $cidadeController->ListarCidade();                       
                         if (isset($_POST['slLocal'])):
                             $_SESSION['local'] = filter_input(INPUT_POST, 'slLocal', FILTER_SANITIZE_STRING);
                         endif;
-
                         $s = ' selected="selected" ';
                         $local = isset($_SESSION['local']) ? $_SESSION['local'] : '';
                         ?>
@@ -108,7 +106,7 @@
                             <?php
                             foreach ($listarCidades as $cidade):
                                 ?>
-                                <option <?php echo $local == $cidade->getCod() ? $s : ''; ?>value="<?= $cidade->getCod(); ?>"><?= $cidade->getNome(); ?></option>
+                                <option <?php echo $local == $cidade->getCod_cidade() ? $s : ''; ?>value="<?= $cidade->getCod_cidade(); ?>"><?= $cidade->getNome_cidade(); ?></option>
                                 <?php
                             endforeach;
                             ?>
@@ -121,7 +119,6 @@
                         if (isset($_POST['slQuarto'])):
                             $_SESSION['quarto'] = filter_input(INPUT_POST, 'slQuarto', FILTER_SANITIZE_STRING);
                         endif;
-
                         $s = ' selected="selected" ';
                         $quarto = isset($_SESSION['quarto']) ? $_SESSION['quarto'] : '';
                         ?>
@@ -134,7 +131,7 @@
                         </select>
                     </div>
                     <div class="column column-2">
-                        <label>VAGAS?</label>                        
+                        <label>VAGAS?</label>                      
 
                         <?php
                         if (isset($_POST['slVaga'])):
@@ -168,6 +165,8 @@
             require REQUIRE_PATH . '/' . $Url[0] . '.php';
         elseif (file_exists(REQUIRE_PATH . '/' . $Url[0] . '/' . $Url[1] . '.php')):
             require REQUIRE_PATH . '/' . $Url[0] . '/' . $Url[1] . '.php';
+        elseif (file_exists(REQUIRE_PATH . '/' . $Url[0] . '/' . $Url[1] . '/' . $Url[2] .'.php')):
+            require REQUIRE_PATH . '/' . $Url[0] . '/' . $Url[1] . '/' . $Url[2] .'.php';
         else:
             require REQUIRE_PATH . '/404.php';
         endif;

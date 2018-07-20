@@ -1,93 +1,116 @@
 <?php
-require_once '../app/configAdmin.php';
+require_once '../app/config.php';
+
+$retorno = "&nbsp;";
+
+if (isset($_SESSION["entrar"])) {
+    header("Location: painel.php");
+}
+
+
+if (filter_input(INPUT_GET, "msg", FILTER_SANITIZE_NUMBER_INT)) {
+    if (filter_input(INPUT_GET, "msg", FILTER_SANITIZE_NUMBER_INT) == 1) {
+        $retorno = "<div class=\"alert alert-danger\" role=\"alert\">Acesso negado!!!</div>";
+    } else {
+        $retorno = "<div class=\"alert alert-warning\" role=\"alert\">Você fez Logout.</div>";
+    }
+}
+
+if (filter_input(INPUT_POST, "btnEntrar", FILTER_SANITIZE_STRING)) {
+
+    $usuarioController = new UsuarioController();
+    $user = filter_input(INPUT_POST, "txtUsuario", FILTER_SANITIZE_STRING);
+    $pass = filter_input(INPUT_POST, "txtSenha", FILTER_SANITIZE_STRING);
+    $permissao = 1;
+    
+    
+    $resultado = $usuarioController->AutenticarUsuario($user, $pass, $permissao);
+
+    if ($resultado != null) {
+       
+        $_SESSION["cod"] = $resultado->getCod();
+        $_SESSION["nome"] = $resultado->getNome();
+        $_SESSION["logado"] = true;
+        header("Location: painel.php");
+    } else {
+        $retorno = "<div class=\"alert alert-danger\" role=\"alert\">Usuário ou senha inválido.</div>";
+    }
+}
 ?>
 <!DOCTYPE html>
-<html>
+<html >
     <head>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width,initial-scale=1">
-        <title>Painel Administrativo</title>
-        <link href="<?= INCLUDE_PATH;?>/css/boot.css" rel="stylesheet" type="text/css"/>
-        <link href="<?= INCLUDE_PATH;?>/css/painel.css" rel="stylesheet" type="text/css"/>
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
-        
+        <title>Login Form with Materializecss</title>
     </head>
+
     <body>
-        <div class="container">
-            <div class="admin-left">                
-                <div class="admin-left-thumb">
-                    <div class="admin-thumb">
-                        <img src="<?= INCLUDE_PATH;?>/images/man.png" alt=""/>
-                    </div>
-                    <h1>Telmo Ricardo</h1>
-                </div>
+    <html>
 
-                <div class="admin-left-menu">
-                   <?php require_once './inc/menu.php'; ?>
-                </div>
+        <head>
+            <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+            <link href="css/materialize.min.css" rel="stylesheet" type="text/css"/>
 
-                <div class="clear"></div>
-            </div>
+        </head>
 
-            <div class="admin-right">
-                <header class="admin-right-header">                    
-                    <div class="admin-header-top">  
-                        <div class="admin-header-left">
-                            <p>Bem-vindo(a) ao Work Controle, Hoje 14/05/2018</p>
-                        </div>                        
-                        <div class="admin-header-right">
-                            <a href="#">
-                                <img class="exit" src="<?= INCLUDE_PATH;?>/images/exit.png"> Sair
-                            </a>
+        <body>
+            <div class="section"></div>
+            <main>
+                <center>
+                    <div class="section"></div>
+
+                    <h5 class="indigo-text">Por favor, faça login em sua conta</h5>
+                    <div class="section"></div>
+
+                    <div class="container">
+                        <div class="z-depth-1 grey lighten-4 row" style="display: inline-block; padding: 32px 48px 0px 48px; border: 1px solid #EEE;">
+
+                            <form class="col s12" method="post">
+                                <div class='row'>
+                                    <div class='col s12'>
+                                    </div>
+                                </div>
+
+                                <div class='row'>
+                                    <div class='input-field col s12'>
+                                        <input class='validate' type='text' name='txtUsuario' id='txtUsuario' />
+                                        <label for='email'>Digite seu Usuario</label>
+                                    </div>
+                                </div>
+
+                                <div class='row'>
+                                    <div class='input-field col s12'>
+                                        <input class='validate' type='password' name='txtSenha' id='txtSenha' />
+                                        <label for='password'>Digite sua senha</label>
+                                    </div>
+                                    <label style='float: right;'>
+                                        <a class='pink-text' href='#!'><b>Esqueceu a senha?</b></a>
+                                    </label>
+                                </div>
+
+                                <br />
+                                <center>
+                                    <div class='row'>
+                                        <input type="submit" name="btnEntrar" class='col s12 btn btn-large waves-effect indigo' value="Entrar">
+                                        
+                                    </div>
+                                </center>
+                            </form>
                         </div>
                     </div>
-                </header>
-
-                <hr class="linha">
-
-                <footer class="admin-header-footer">                    
-                    <div class="painel">
-                        <img src="<?= INCLUDE_PATH;?>/images/house-outline.png"><h1>Painel Administrativo</h1>
-                        <p>Work Controller / <a href="#">Painel</a></p>
-                    </div>                    
-                </footer>  
-                
-                <hr class="linha">
-
-                <div class="clear"></div>
-
-                <!--CONTEUDO DO SITE-->
-                <div class="conteudo-row">
-                <?php
-            
-                $Url[1] = (empty($Url[1]) ? null : $Url[1]);
-                
-                if (file_exists(REQUIRE_PATH . '/' . $Url[0] . '.php')):
-                    require REQUIRE_PATH . '/' . $Url[0] . '.php';
-                elseif (file_exists(REQUIRE_PATH . '/' . $Url[0] . '/' . $Url[1] . '.php')):
-                    require REQUIRE_PATH . '/' . $Url[0] . '/' . $Url[1] . '.php';
-                else:
-                    require REQUIRE_PATH . '/404.php';
-                endif;           
                     
-                ?>
-                    </div>
-                <!--CONTEUDO DO SITE-->
+                </center>
 
-                <div class="footer bg-azul">
-                    <div class="content">
-                        <p><?= date("Y") ?> - Todos os direitos reservados</p>
-                    </div>
-                </div>
+                <div class="section"></div>
+                <div class="section"></div>
+            </main>
 
-                <div class="clear"></div>
-            </div>
+            <script src="js/jquery.min.js" type="text/javascript"></script>
+            <script src="js/materialize.min.js" type="text/javascript"></script>
+        </body>
+
+    </html>
 
 
-        </div>
-    </body>
-    <script src="<?= INCLUDE_PATH;?>/js/jquery-2.2.4.js" type="text/javascript"></script>
-    <script src="<?= INCLUDE_PATH;?>/js/fontawesome.js" type="text/javascript"></script>
-    <script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js" integrity="sha384-3LK/3kTpDE/Pkp8gTNp2gR/2gOiwQ6QaO7Td0zV76UFJVhqLl4Vl3KL1We6q6wR9" crossorigin="anonymous"></script>
-    <script src="<?= INCLUDE_PATH;?>/js/ajax.js" type="text/javascript"></script>
+</body>
 </html>

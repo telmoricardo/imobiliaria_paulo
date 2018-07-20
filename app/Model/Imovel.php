@@ -8,6 +8,7 @@
 
 require_once 'Agente.php';
 require_once 'Categoria.php';
+require_once 'Cidade.php';
 
 class Imovel {
     private $cod;
@@ -15,10 +16,13 @@ class Imovel {
     private $url;
     private $valor;
     private $condominio;
+    private $iptu;
+    private $seguro;
     private $descricao;
+    private $obs_condiminio;
+    private $obs_alugar;    
     private $endereco;
-    private $cidade;
-    private $estado;
+    private $cidade;    
     private $categoria;
     private $quartos;
     private $suite;
@@ -34,10 +38,13 @@ class Imovel {
     private $agente;
     private $status;
     private $view;
+    private $pet;
+    private $parada;
     
     public function __construct() {
         $this->agente = new Agente();
         $this->categoria = new Categoria();
+        $this->cidade = new Cidade();
     }
    
     function getCod() {
@@ -60,8 +67,24 @@ class Imovel {
         return $this->condominio;
     }
 
+    function getIptu() {
+        return $this->iptu;
+    }
+
+    function getSeguro() {
+        return $this->seguro;
+    }
+
     function getDescricao() {
         return $this->descricao;
+    }
+
+    function getObs_condiminio() {
+        return $this->obs_condiminio;
+    }
+
+    function getObs_alugar() {
+        return $this->obs_alugar;
     }
 
     function getEndereco() {
@@ -70,10 +93,6 @@ class Imovel {
 
     function getCidade() {
         return $this->cidade;
-    }
-
-    function getEstado() {
-        return $this->estado;
     }
 
     function getCategoria() {
@@ -136,6 +155,14 @@ class Imovel {
         return $this->view;
     }
 
+    function getPet() {
+        return $this->pet;
+    }
+
+    function getParada() {
+        return $this->parada;
+    }
+
     function setCod($cod) {
         $this->cod = $cod;
     }
@@ -156,8 +183,24 @@ class Imovel {
         $this->condominio = $condominio;
     }
 
+    function setIptu($iptu) {
+        $this->iptu = $iptu;
+    }
+
+    function setSeguro($seguro) {
+        $this->seguro = $seguro;
+    }
+
     function setDescricao($descricao) {
         $this->descricao = $descricao;
+    }
+
+    function setObs_condiminio($obs_condiminio) {
+        $this->obs_condiminio = $obs_condiminio;
+    }
+
+    function setObs_alugar($obs_alugar) {
+        $this->obs_alugar = $obs_alugar;
     }
 
     function setEndereco($endereco) {
@@ -166,10 +209,6 @@ class Imovel {
 
     function setCidade($cidade) {
         $this->cidade = $cidade;
-    }
-
-    function setEstado($estado) {
-        $this->estado = $estado;
     }
 
     function setCategoria($categoria) {
@@ -230,6 +269,14 @@ class Imovel {
 
     function setView($view) {
         $this->view = $view;
+    }
+
+    function setPet($pet) {
+        $this->pet = $pet;
+    }
+
+    function setParada($parada) {
+        $this->parada = $parada;
     }
 
 

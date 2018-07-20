@@ -19,7 +19,7 @@ if ($cidade) {
     
 }
 if ($quarto) {
-    $sql .= "AND quartos = '" . $quarto . "' ";
+    $sql .= "AND quarto = '" . $quarto . "' ";
 } else {
     
 }

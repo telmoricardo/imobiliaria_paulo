@@ -18,8 +18,8 @@ class Helper {
      */
     public static function Name($Name) {
         self::$Format = array();
-        self::$Format['a'] = 'ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜüÝÞßàáâãäåæçèéêëìíîïðñòóôõöøùúûýýþÿRr"!@#$%&*()_-+={[}]/?;:.,\\\'<>°ºª';
-        self::$Format['b'] = 'aaaaaaaceeeeiiiidnoooooouuuuuybsaaaaaaaceeeeiiiidnoooooouuuyybyRr                                 ';
+        self::$Format['a'] = 'ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜüÝÞßàáâãäåæçèéêëìíîïðñòóôõöøùúûýýþÿRr"!@#$%&*()_-+={[}]/?;:.,\\\'<>°ºª²³';
+        self::$Format['b'] = 'aaaaaaaceeeeiiiidnoooooouuuuuybsaaaaaaaceeeeiiiidnoooooouuuyybyRr                                   ';
 
         self::$Data = strtr(utf8_decode($Name), utf8_decode(self::$Format['a']), self::$Format['b']);
         self::$Data = strip_tags(trim(self::$Data));
@@ -43,7 +43,7 @@ class Helper {
             return '';
         }
     }
-    
+
     /**
      * <b>Tranforma Data:</b> Transforma uma data no formato DD/MM/YY em uma data no formato TIMESTAMP!
      * @param STRING $Name = Data em (d/m/Y) ou (d/m/Y H:i:s)
@@ -60,7 +60,7 @@ class Helper {
         self::$Data = self::$Data[2] . '-' . self::$Data[1] . '-' . self::$Data[0] . ' ' . self::$Format[1];
         return self::$Data;
     }
-    
+
     /**
      * <b>Limita os Palavras:</b> Limita a quantidade de palavras a serem exibidas em uma string!
      * @param STRING $String = Uma string qualquer
@@ -78,9 +78,8 @@ class Helper {
         $Result = ( self::$Format < $NumWords ? $NewWords . $Pointer : self::$Data );
         return $Result;
     }
-    
-    public function getCleanURL($url)
-    {
+
+    public function getCleanURL($url) {
         $url = html_entity_decode($url);
         $url = strtolower($url);
         $url = preg_replace('/[áàãâä]/', 'a', $url);
@@ -91,11 +90,11 @@ class Helper {
         $url = preg_replace('/[ç]/', 'c', $url);
         $url = preg_replace('/[ñ]/', 'n', $url);
         $url = preg_replace('/[[:space:]]/', '-', $url);
-        $url = preg_replace('/[^a-z0-9\-]/', '' ,$url);
+        $url = preg_replace('/[^a-z0-9\-]/', '', $url);
         $url = preg_replace('/(-){2,}/', '-', $url);
         return $url;
     }
-    
+
     public static function limitarTexto($texto, $limite) {
         $contador = strlen($texto);
         if ($contador >= $limite) {
@@ -104,6 +103,18 @@ class Helper {
         } else {
             return $texto;
         }
+    }
+
+    public static function Valor($valor) {
+        $verificaPonto = ".";
+        if (strpos("[" . $valor . "]", "$verificaPonto")):
+            $valor = str_replace('.', '', $valor);
+            $valor = str_replace(',', '.', $valor);
+        else:
+            $valor = str_replace(',', '.', $valor);
+        endif;
+
+        return $valor;
     }
 
 }

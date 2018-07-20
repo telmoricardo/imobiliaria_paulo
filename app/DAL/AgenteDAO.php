@@ -14,15 +14,13 @@ class AgenteDAO {
 
     public function Cadastrar(Agente $agente) {
         try {
-            
             $sql = "INSERT INTO agente (nome, email, celular, telefone, regiao) VALUES (:nome, :email, :celular, :telefone, :regiao)";
             $param = array(
                 ":nome" => $agente->getNome(),
                 ":email" => $agente->getEmail(),
                 ":celular" => $agente->getCelular(),
                 ":telefone" => $agente->getTelefone(),
-                ":regiao" => $agente->getRegiao()
-               
+                ":regiao" => $agente->getRegiao()               
             );
 
             return $this->pdo->ExecuteNonQuery($sql, $param);
@@ -35,21 +33,19 @@ class AgenteDAO {
         }
     }    
 
-    public function listarAgente() {
+    public function ListarAgente() {
         try {
-            $sql = "SELECT * FROM agente ORDER BY codAgente DESC";
+            $sql = "SELECT * FROM agente ORDER BY cod_agente DESC";
             $dt = $this->pdo->ExecuteQuery($sql);
-
             $listaAgente = [];
             foreach ($dt as $pts) {
                 $agente = new Agente();
-                $agente->setCod($pts['codAgente']);
-                $agente->setNome($pts['nome']);
-                $agente->setEmail($pts['email']);
-                $agente->setRegiao($pts['regiao']);
-                $agente->setCelular($pts['celular']);
-                $agente->setTelefone($pts['telefone']);
-                
+                $agente->setCod($pts['cod_agente']);
+                $agente->setNome($pts['nome_agente']);
+                $agente->setEmail($pts['email_agente']);
+                $agente->setRegiao($pts['regiao_agente']);
+                $agente->setCelular($pts['celular_agente']);
+                $agente->setTelefone($pts['telefone_agente']);                
                 $listaAgente[] = $agente;
             }
             return $listaAgente;

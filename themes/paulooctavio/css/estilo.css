@@ -109,7 +109,7 @@
 .mapa{width: 100%; float: left; }
 .mapa iframe{width: 100%;}
 .streetview{width: 100%; float: left; }
-.streetview iframe{width: 100%;}
+.streetview iframe{width: 100%; }
 /*----------------- SECAO DESCRICAO ----------------*/
 .main .secao_desc{width: 67%;float: left;}
 .main .secao_desc  .art_desc{width: 100%;float: left;margin: 30px 0; }
@@ -248,6 +248,8 @@
     display: inline-block;
     padding: 10px 20px;
     font-size: 1em;
+    width: 90%;
+    margin: 0 5%;
     font-weight: 400;
     color: #fff;
     background: #333;
@@ -270,6 +272,16 @@
 .contato .contato_txt{float: left; margin-bottom: 1rem; width: 100%;}
 .contato_txt h1{margin-bottom: 8px; }
 .contato_txt p{margin-bottom: 8px;}
+
+/*horario*/
+.semana{width: 100%; float: left; text-align: center;}
+.semana .dias{width:20%; margin: 0; float: left; padding: 15px;}
+.semana .dias p{background-color: red; color:#fff; padding: 15px; margin-bottom: 10px;};
+.semana .horario{width: 100%;}
+/*agendar*/
+.agendar{margin-top: 2rem; margin-bottom: 2rem; float: left; width: 100%;}
+.agendar h1{float: left; width: 100%; margin-bottom: 2rem;}
+.agendar p{float: left; width: 100%; margin-bottom: 1rem;}
 
 
 /*---------------------------------------------MEDIA PAGES-----------------------------------------*/

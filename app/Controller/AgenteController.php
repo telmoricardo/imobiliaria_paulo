@@ -7,14 +7,13 @@ class AgenteController {
     public function __construct() {
         $this->agenteDAO = new AgenteDAO();
     }
-
+    
     public function Cadastrar(Agente $agente) {
         return $this->agenteDAO->Cadastrar($agente);
     }
-
     
-    public function listarAgente() {
-        return $this->agenteDAO->listarAgente();
+    public function ListarAgente() {
+        return $this->agenteDAO->ListarAgente();
     }
     
     public function listaCorretorR($regiao) {

@@ -31,11 +31,28 @@ else:
     $andar = $retornaImovel->getAndar();
     $vagas = $retornaImovel->getGaragem();
     $descricao = $retornaImovel->getDescricao();
+    //moeda
     $aluguel = $retornaImovel->getValor();
     $condominio = $retornaImovel->getCondominio();
+    $seguro = $retornaImovel->getSeguro();
+    $iptu = $retornaImovel->getIptu();
     $mapa = $retornaImovel->getMapa();
     $street = $retornaImovel->getStreet();
+    $pet = $retornaImovel->getPet();
+    $parada = $retornaImovel->getParada();
     $trecentosSessenta = "";
+    
+    //dados do agente
+    $nomeAgente = $retornaImovel->getAgente()->getNome();
+    $regiaoAgente = $retornaImovel->getAgente()->getRegiao();
+    $phoneAgente = $retornaImovel->getAgente()->getTelefone();
+    $emailAgente = $retornaImovel->getAgente()->getEmail();
+    
+    //observações
+    $obsCondominio = $retornaImovel->getObs_condiminio();
+    $obsAlugar = $retornaImovel->getObs_alugar();
+    //retorno dos iframes
+  
 
 ?>
 <!----------------------------------SLIDE HOME ----------------------------------->
@@ -62,11 +79,12 @@ else:
 </header>
 
 <header id="mapa" class="container mapa">
-    <?= $mapa;?>
+    <iframe src="<?= $mapa;?>" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
 </header>
 
 <header id="streetview" class="container streetview">
-    <?= $street;?>
+    <iframe src="<?= $street;?>" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+    
 </header>
 
 <!------------------------------- CONTENT SITE -------------------------------->
@@ -147,11 +165,24 @@ else:
                         </div>                               
                         <div class="desc_icons column column-1">
                             <span class="fa fa-paw"></span>
-                            <p>ACEITA PET</p>
+                            <?php
+                            if($pet == 1):
+                                echo '<p>NÃO ACEITA</p>';
+                            else:
+                                echo '<p>ACEITA PET</p>';
+                            endif;
+                            ?>
                         </div>
                         <div class="desc_icons column column-1">
                             <span class="fa fa-subway"></span>
-                            <p>PARADAS PROX.</p>
+                            <?php
+                            if($pet == 1):
+                                echo '<p>NÃO TEM PARADAS PROX</p>';
+                            else:
+                                echo '<p>PARADAS PROX.</p>';
+                            endif;
+                            ?>
+                            <p></p>
                         </div>
                     </div>
                 </div>                        
@@ -160,29 +191,30 @@ else:
                 <article class="descricao_imv">
                     <div class="box_descricao_imv">
                         <h1>Descrição do Imóvel</h1>
-                        <p>
-                            <?php
-                            echo html_entity_decode($descricao);
-                            ?>
-                        </p>
-                    </div>
-                    <div class="box_descricao_cdm">
-                        <h1>Condomínio</h1>
-                        <p>
-                            Disponível piscina, churrasqueira, academia,
-                            salão de festas, sauna, lavanderia no prédio,
-                            espaço gourmet na área comum, portaria 24hrs.
-                        </p>
-                    </div>
-
-                    <div class="box_descricao_cdm">
-                        <h1>O quê preciso para alugar este imóvel?</h1>
-                        <p>
-                            Comprovante de renda mensal bruta de aproximadamente R$ 15.400, 00.
-                            A renda pode ser composta por até 4 pessoas físicas. Esse valor
-                            pode variar em função do aluguél final acordado.
-                        </p>
-                    </div>
+                        <p><?= html_entity_decode($descricao); ?></p>
+                    </div>                    
+                    
+                    <?php
+                    if($obsCondominio == null):                        
+                    else:
+                        echo '<div class="box_descricao_cdm">';
+                        echo '<h1>Condomínio</h1>';
+                        echo $obsCondominio;
+                        echo '</div>';
+                    endif;                    
+                    ?>                  
+                    
+                    <?php
+                    if($obsAlugar  == null):                        
+                    else:
+                        echo '<div class="box_descricao_cdm">';
+                        echo '<h1>O quê preciso para alugar este imóvel?</h1>';
+                        echo $obsAlugar;
+                        echo '</div>';
+                    endif;                    
+                    ?>
+                   
+                    
                 </article>
             </article>
         </section>
@@ -199,15 +231,35 @@ else:
                 <tr>
                     <td class="info">Condomínio</td>
                     <td class="value">R$ <?= number_format($condominio, 2, ",", ".")?></td>                            
-                </tr>                        
+                </tr>                       
+                
+                <?php 
+                if($iptu == 0):
+                    else:
+                    ?>
                 <tr class="tr_color">
                     <td class="info">IPTU</td>
-                    <td class="value">R$ 1.000,00</td>                            
-                </tr>                        
+                    <td class="value">R$ <?= number_format($iptu, 2, ",", ".")?></td> 
+                </tr>  
+                <?php
+
+                endif;
+                ?>
+                
+                <?php 
+                if($seguro == 0):
+                    else:
+                    ?>
                 <tr>
                     <td class="info">Seguro Incédio</td>
-                    <td class="value">R$ 900,00</td>                            
-                </tr>                        
+                    <td class="value">R$ <?= number_format($seguro, 2, ",", ".")?></td>                            
+                </tr>                 
+                <?php
+
+                endif;
+                ?>                                               
+                                      
+                                       
             </table>
 
             <!--------------------------------------CONTATO DO AGENTE ------------------------>          
@@ -215,16 +267,16 @@ else:
                 <div class="box_agente">
                     <h1>Contatos do(a) Agente</h1>
                     <p>
-                        <strong> Nome:</strong> Iolanda<br>
-                        <strong>Agente das regiões de: </strong> Asa Norte e demais regiões<br>
-                        <strong>Telefone:</strong> (61)3315-8553<br>
-                        <strong>Email: </strong>iolanda .tenorio@paulooctavio .com .br<br>
+                        <strong> Nome:</strong> <?= $nomeAgente; ?><br>
+                        <strong>Agente das regiões de: </strong> <?= $regiaoAgente; ?><br>
+                        <strong>Telefone:</strong> <?= $phoneAgente; ?><br>
+                        <strong>Email: </strong><?= $emailAgente; ?><br>
                     </p>
                 </div>
 
                 <div class="box_speack_user">
                     <h1 class="font-zero">Horario disponivel e enviar documentos</h1>
-                    <a href="<?= HOME;?>/agendar" class="btn btn-clock">
+                    <a href="<?= HOME;?>/horario" class="btn btn-clock">
                         <span class="fa fa-clock"></span>  Horário Disponível para Visita
                     </a>                  
                     
